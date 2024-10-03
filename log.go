@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"reflect"
+	"strings"
 	"time"
 
 	gokitlog "github.com/go-kit/log"
@@ -104,22 +105,54 @@ func (o *OTelLogger) Log(keyvals ...interface{}) error {
 	for i := 0; i < len(keyvals); i += 2 {
 		k, v := keyvals[i], keyvals[i+1]
 
+		// sets timestamp
 		if timeValue, ok := v.(time.Time); ok {
 			r.SetTimestamp(timeValue)
 			continue
 		}
 
+		// sets context
 		if ctx, ok := v.(context.Context); ok {
 			o.ctx = ctx
 			continue
 		}
 
-		// TODO. Extract severity and severity text
+		// sets severityLevel and severityText. This expects key to match the keyword "level"
+		if k == "level" {
+			r.SetSeverity(convertLevel(v))
+			r.SetSeverityText(v.(string))
+			continue
+		}
 
+		// sets attributes
 		r.AddAttributes(log.KeyValue{Key: k.(string), Value: convertValue(v)})
 	}
+
 	o.logger.Emit(o.ctx, r)
 	return nil
+}
+
+func convertLevel(level interface{}) log.Severity {
+	s := level.(string)
+	s = strings.ToLower(s)
+
+	switch s {
+	case "debug":
+		return log.SeverityDebug
+	case "info":
+		return log.SeverityInfo
+	case "warn":
+		return log.SeverityWarn
+	case "error":
+		return log.SeverityError
+	case "panic":
+		return log.SeverityFatal1
+	case "fatal":
+		return log.SeverityFatal2
+	default:
+		return log.SeverityUndefined
+	}
+
 }
 
 func convertValue(v interface{}) log.Value {
