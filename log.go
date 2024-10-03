@@ -108,9 +108,9 @@ func (o *OTelLogger) Log(keyvals ...interface{}) error {
 	for i := 0; i < len(keyvals); i += 2 {
 		k, v := keyvals[i], keyvals[i+1]
 
-		// sets timestamp
-		if timeValue, ok := v.(time.Time); ok {
-			r.SetTimestamp(timeValue)
+		// sets timestamp.  This expects key to match the keyword "ts"
+		if k == "ts" {
+			r.SetTimestamp(v.(time.Time))
 			continue
 		}
 

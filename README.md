@@ -5,7 +5,7 @@ otelgokit is a bridge between [go-kit-log](https://github.com/go-kit/log) and OT
 ## Some Notes 
 go-kit-log supports structured key-value logging. For the purpose of our use case, please keep following notes in mind.
 
-- Timestamp is extracted if the value is of type `time.Time`
+- Timestamp is extracted only if the key matches the keyword "ts". 
 - logging level is extracted only if the key matches the keyword "level"
 
     Currently, the following levels are supported. You may clone to add/remove/customize it according to your requirement. Follow this piece of [code](https://github.com/khushijain21/otelgokit/blob/main/log.go#L135)
@@ -18,6 +18,7 @@ go-kit-log supports structured key-value logging. For the purpose of our use cas
     - "panic"
     - "fatal"
 - This bridge also supports context passing (for trace correlation). 
+- Please above keys uniquely to avoid ambiguity
 
 It currently does not support minimum level logging
 ## Example
