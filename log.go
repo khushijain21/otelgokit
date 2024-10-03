@@ -53,7 +53,7 @@ type optFunc func(config) config
 func (f optFunc) apply(c config) config { return f(c) }
 
 // WithVersion returns an [Option] that configures the version of the
-// [log.Logger] used by a [OTelLogger]. The version should be the version of the
+// [log.Logger] used by a [gokitlog.Logger]. The version should be the version of the
 // package that is being logged.
 func WithVersion(version string) Option {
 	return optFunc(func(c config) config {
@@ -63,7 +63,7 @@ func WithVersion(version string) Option {
 }
 
 // WithSchemaURL returns an [Option] that configures the semantic convention
-// schema URL of the [log.Logger] used by a [OTelLogger]. The schemaURL should be
+// schema URL of the [log.Logger] used by a [gokitlog.Logger]. The schemaURL should be
 // the schema URL for the semantic conventions used in log records.
 func WithSchemaURL(schemaURL string) Option {
 	return optFunc(func(c config) config {
@@ -73,7 +73,7 @@ func WithSchemaURL(schemaURL string) Option {
 }
 
 // WithLoggerProvider returns an [Option] that configures [log.LoggerProvider]
-// used by a [OTelLogger] to create its [log.Logger].
+// used by a [gokitlog.Logger] to create its [log.Logger].
 //
 // By default if this Option is not provided, the Handler will use the global
 // LoggerProvider.
@@ -91,9 +91,9 @@ type OTelLogger struct {
 
 var _ gokitlog.Logger = (*OTelLogger)(nil)
 
-// NewOTelLogger creates a new OTelLogger
+// NewOTelLogger creates a new [gokitlog.Logger]
 // The name should be the package import path that is being logged.
-func NewOTelLogger(name string, opts ...Option) *OTelLogger {
+func NewOTelLogger(name string, opts ...Option) gokitlog.Logger {
 	cfg := newConfig(opts)
 
 	return &OTelLogger{
