@@ -3,7 +3,7 @@ otelgokit is a bridge between go-kit-log and OTel logs
 
 
 ## Some Notes 
-go-kit-log supports structured key-value logging.
+go-kit-log supports structured key-value logging. For the purpose of our use case, please keep following notes in mind.
 
 - Timestamp is extracted if the value is of type `time.Time`
 - logging level is extracted only if the key matches the keyword "level"
@@ -31,7 +31,7 @@ logger := NewOTelLogger("testLog", provider)
 // You can set context for trace correlation 
 ctx := context.Background()
 
-// logs at info level
+// logs at level "info"
 logger.Log("ctx", ctx, "level", "info", testKey, testValue)  
 
 ```
