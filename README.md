@@ -30,6 +30,7 @@ logger := NewOTelLogger("testLog", provider)
 
 // You can set context for trace correlation 
 ctx := context.Background()
+
 // logs at info level
 logger.Log("ctx", ctx, "level", "info", testKey, testValue)  
 
