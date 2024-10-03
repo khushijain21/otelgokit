@@ -8,7 +8,7 @@ go-kit-log supports structured key-value logging.
 - Timestamp is extracted if the value is of type `time.Time`
 - logging level is extracted only if the key matches the keyword "level"
 
-    Currently, the following levels are supported. You may clone to add/remove/customize it according to your requirement. Follow this piece of (code)[https://github.com/khushijain21/otelgokit/blob/7e45608feef0741c904bc6222624f3e3379602d8/log.go#L135] 
+    Currently, the following levels are supported. You may clone to add/remove/customize it according to your requirement. Follow this piece of (https://github.com/khushijain21/otelgokit/blob/7e45608feef0741c904bc6222624f3e3379602d8/log.go#L135
 
     Supported Levels:
     - "debug"
