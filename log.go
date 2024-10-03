@@ -93,7 +93,7 @@ var _ gokitlog.Logger = (*OTelLogger)(nil)
 
 // NewOTelLogger creates a new [gokitlog.Logger]
 // The name should be the package import path that is being logged.
-func NewOTelLogger(name string, opts ...Option) gokitlog.Logger {
+func NewLogger(name string, opts ...Option) gokitlog.Logger {
 	cfg := newConfig(opts)
 
 	return &OTelLogger{

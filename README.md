@@ -26,12 +26,15 @@ It currently does not support minimum level logging
 // Use a working LoggerProvider implementation instead e.g. use go.opentelemetry.io/otel/sdk/log.
 provider := noop.NewLoggerProvider()
 
-logger := NewOTelLogger("testLog", provider)
+logger := NewLogger("testLog", provider)
 
 // You can set context for trace correlation 
 ctx := context.Background()
 
 // logs at level "info"
-logger.Log("ctx", ctx, "level", "info", testKey, testValue)  
+logger.Log("time", time.Now(), "ctx", ctx, "level", "info", "key", "value")  
+
+// Child Logger
+childlogger := gokitlog.With(logger, "testKey", "testValue")
 
 ```

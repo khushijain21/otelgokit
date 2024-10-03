@@ -32,7 +32,7 @@ func TestLogger(t *testing.T) {
 	ctx = context.WithValue(ctx, userKey, true)
 
 	rec := logtest.NewRecorder()
-	logger := NewOTelLogger(loggerName, WithLoggerProvider(rec))
+	logger := NewLogger(loggerName, WithLoggerProvider(rec))
 
 	t.Run("Log", func(t *testing.T) {
 		logger.Log("ctx", ctx, "level", "info", testKey, testValue)
