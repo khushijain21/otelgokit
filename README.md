@@ -1,5 +1,5 @@
 # otelgokit
-otelgokit is a bridge between go-kit-log and OTel logs
+otelgokit is a bridge between [go-kit-log](https://github.com/go-kit/log) and OTel logs
 
 
 ## Some Notes 
