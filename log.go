@@ -43,7 +43,7 @@ func (c config) logger(name string) log.Logger {
 	return c.provider.Logger(name, opts...)
 }
 
-// Option configures a [Core].
+// Option configures a [OTelLogger].
 type Option interface {
 	apply(config) config
 }
@@ -108,7 +108,7 @@ func (o *OTelLogger) Log(keyvals ...interface{}) error {
 	for i := 0; i < len(keyvals); i += 2 {
 		k, v := keyvals[i], keyvals[i+1]
 
-		// sets timestamp.  This expects key to match the keyword "ts"
+		// sets timestamp. This expects key to match the keyword "ts"
 		if k == "ts" {
 			r.SetTimestamp(v.(time.Time))
 			continue
